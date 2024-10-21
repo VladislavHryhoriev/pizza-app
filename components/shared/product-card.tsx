@@ -23,7 +23,13 @@ export const ProductCard = ({
     <div className={className}>
       <Link href={`/product/${id}`}>
         <div className="flex h-[260px] justify-center rounded-lg bg-secondary p-6">
-          <Image src={imageUrl} alt={name} width={215} height={215} />
+          <Image
+            src={imageUrl}
+            alt={name}
+            width={215}
+            height={215}
+            className="object-contain"
+          />
         </div>
 
         <Title text={name} size="sm" className="mb-1 mt-3 font-bold" />

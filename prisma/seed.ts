@@ -1,5 +1,6 @@
 import { hashSync } from "bcrypt";
 import { prisma } from "./prisma-client";
+import { categories, ingredients, products } from "./constants";
 
 async function up() {
   await prisma.user.createMany({
@@ -19,6 +20,29 @@ async function up() {
         role: "ADMIN",
       },
     ],
+  });
+
+  await prisma.category.createMany({
+    data: categories,
+  });
+
+  await prisma.ingredient.createMany({
+    data: ingredients,
+  });
+
+  await prisma.product.createMany({
+    data: products,
+  });
+
+  const pizza1 = await prisma.product.create({
+    data: {
+      name: "Пеперони фреш",
+      imageUrl: "/pizzas/karbonara.webp",
+      categoryId: 1,
+      ingredients: {
+        connect: ingredients.slice(0, 5),
+      },
+    },
   });
 }
 
